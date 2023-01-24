@@ -37,3 +37,7 @@ This project is deployed with Vercel, you can check out the deployed site using 
 - [Next.js](https://nextjs.org/) - A framework for building server-rendered React applications
 - [Sanity](https://www.sanity.io/) - A headless content management system
 - [Vercel](https://vercel.com/) - A platform for hosting web applications
+
+## Payment Integration
+
+This project uses Stripe for handling payments on the website. You can find more information about Stripe and their documentation [here](https://stripe.com/docs)

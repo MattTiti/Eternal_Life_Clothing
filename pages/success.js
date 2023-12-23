@@ -1,13 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { BsBagCheckFill } from 'react-icons/bs';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { BsBagCheckFill } from "react-icons/bs";
+import { useRouter } from "next/router";
 
-import { useStateContext } from '../context/StateContext';
-import { runFireworks } from '../lib/utils';
+import { useStateContext } from "../context/StateContext";
+import { runFireworks } from "../lib/utils";
 
 const Success = () => {
   const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
-  
+  const router = useRouter();
+  const { session_id } = router.query;
+
+  useEffect(() => {
+    if (session_id) {
+      // Call your API route to process the session
+      fetch(`/api/succ?session_id=${session_id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          // Handle the response data
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+  }, [session_id]);
+
   useEffect(() => {
     localStorage.clear();
     setCartItems([]);
@@ -37,7 +55,7 @@ const Success = () => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Success
+export default Success;

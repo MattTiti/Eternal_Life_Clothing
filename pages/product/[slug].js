@@ -15,6 +15,10 @@ const ProductDetails = ({ product, products }) => {
   const [index, setIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState("");
   const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
+  const detailsArray = details
+    .split(".")
+    .map((item) => item.trim())
+    .filter((item) => item);
 
   const handleAddToCart = () => {
     if (!selectedSize) {
@@ -65,7 +69,7 @@ const ProductDetails = ({ product, products }) => {
 
         <div className="product-detail-desc">
           <h1>{name}</h1>
-          <div className="reviews">
+          {/* <div className="reviews">
             <div>
               <AiFillStar />
               <AiFillStar />
@@ -74,9 +78,10 @@ const ProductDetails = ({ product, products }) => {
               <AiOutlineStar />
             </div>
             <p>(20)</p>
-          </div>
+          </div> */}
+          <p className="price">${price}</p>
+
           <div className="size-selector">
-            <h3>Size:</h3>
             <div>
               {sizes.map((sizeObj) => (
                 <button
@@ -91,10 +96,15 @@ const ProductDetails = ({ product, products }) => {
               ))}
             </div>
           </div>
+          <div className="details-con">
+            <h4>Details: </h4>
+            <ul>
+              {detailsArray.map((detail, index) => (
+                <li key={index}>{detail}</li>
+              ))}
+            </ul>
+          </div>
 
-          <h4>Details: </h4>
-          <p>{details}</p>
-          <p className="price">${price}</p>
           <div className="quantity">
             <h3>Quantity:</h3>
             <p className="quantity-desc">

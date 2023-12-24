@@ -81,6 +81,11 @@ width: 100%;
   cursor: pointer;
 }
 
+.details-con ul{
+  margin-left: 30px;
+  margin-top: 10px;
+}
+
 .cart-icon{
   font-size: 25px;
   color: gray;
@@ -173,7 +178,7 @@ width: 100%;
 .hero-banner-container h1{
   color: white;
   font-size: 10em;
-  margin-left: -20px;
+  margin-left: -10px;
   text-transform: uppercase;
 }
 .hero-banner-image{
@@ -251,7 +256,7 @@ text-align: end;
 .banner-desc .left h3{
   font-weight: 900;
   font-size: 80px;
-  margin-left: 25px;
+  margin-left: 8px;
 }
 .banner-desc .left p{
   margin:18px;
@@ -439,7 +444,6 @@ padding: 30px 65px;
 .product-detail-image{
   border-radius: 15px;
    background-color: #ebebeb;
-
   width: 400px;
   height: 400px;
   cursor: pointer;
@@ -486,7 +490,7 @@ padding: 30px 65px;
 .product-detail-desc .price{
   font-weight: 700 ;
   font-size: 26px;
-  margin-top: 30px;
+  margin-top: 10px;
   color:#000000;
 }
 .price .old-price, .product-price .old-price, .price .old-price{
@@ -516,6 +520,34 @@ padding: 30px 65px;
    transform: scale(1, 1);
   transition: transform 0.5s ease;
 }
+
+.size-selector button{
+  padding: 10px 10px;
+  border: 1px solid #000000 ;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 300;
+  background-color: white;
+  color: #000000;
+  cursor: pointer;
+  width: 60px;
+   transform: scale(1, 1);
+  cursor: pointer;
+  transition: .3s ease-in-out;
+
+}
+
+.size-selector .size-selected {
+  background-color: #a29182;
+  color: white;
+}
+
+
+.size-selector button:hover{
+  background-color: #a29182;
+
+}
+
 .buttons .add-to-cart:hover{
   transform:scale(1.1,1.1)
 }
@@ -538,10 +570,10 @@ padding: 30px 65px;
 }
 .quantity-desc{
   border: 1px solid gray;
-padding: 6px;
+padding: 3px;
 }
 .quantity-desc span{
-  font-size: 16px;
+  font-size: 10px;
   padding: 6px 12px;
   cursor: pointer;
 }
@@ -556,6 +588,9 @@ padding: 6px;
 .quantity-desc .plus{
   color: rgb(49, 168, 49);
 
+}
+.quantity h3 {
+  margin-top: 6px;
 }
 
 .maylike-products-wrapper{
@@ -654,7 +689,7 @@ margin-top: 160px;
   .banner-desc .left h3{
     font-weight: 900;
     font-size: 50px;
-    margin-left: 5px;
+    margin-left: 0px;
   }
   .banner-desc .left p{
     margin:18px;
@@ -677,6 +712,7 @@ margin-top: 160px;
   }
   .hero-banner-container h1{
     font-size: 50px;
+    margin-left: 15px;
   }
  .hero-banner-container h3{
     font-size: 40px;

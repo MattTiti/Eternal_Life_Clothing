@@ -8,7 +8,7 @@ const Home = ({ products, otherProd, essentialProd, posters, bannerData }) => (
     <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
     <div className="products-heading">
       <h2>Essentials Collection</h2>
-      <p>Collection Out Now</p>
+      <p>Eternal Logo Branded Essential Pieces</p>
     </div>
 
     <div className="products-container">
@@ -19,7 +19,7 @@ const Home = ({ products, otherProd, essentialProd, posters, bannerData }) => (
 
     <div className="products-heading">
       <h2>Ankh Logo Collection</h2>
-      <p>Collection Out Now</p>
+      <p>Eternal Ankh Logo Branded Pieces</p>
     </div>
 
     <div className="products-container">
@@ -30,7 +30,7 @@ const Home = ({ products, otherProd, essentialProd, posters, bannerData }) => (
 
     <div className="products-heading">
       <h2>Poster Collection</h2>
-      <p>Collection Out Now</p>
+      <p>Posters Created with Photoshop, DALL-E, and Photoshop AI</p>
     </div>
 
     <div className="products-container">

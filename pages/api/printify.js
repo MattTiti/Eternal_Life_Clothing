@@ -16,8 +16,8 @@ export default async function handler(req, res) {
   // Format the order for Printify's API
   const printifyOrder = {
     line_items: orderDetails.items.map((item) => ({
-      product_id: item.product_id,
-      variant_id: item.variant_id,
+      product_id: item.productId,
+      variant_id: item.variantId,
       quantity: item.quantity,
     })),
     is_printify_express: false,

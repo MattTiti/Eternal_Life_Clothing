@@ -32,9 +32,14 @@ export default {
       type: 'string',
     },
     {
-      name: 'variantID',
-      title: 'VariantID',
-      type: 'string',
+      name: 'sizes',
+      title: 'Sizes',
+      type: 'array',
+      of: [
+        {
+          type: 'sizeVariant',
+        },
+      ],
     },
     {
       name: 'price',

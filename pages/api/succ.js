@@ -2,6 +2,7 @@ import Stripe from "stripe";
 import fetch from "node-fetch";
 
 const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
+const PRINTIFY_API_KEY = process.env.NEXT_PUBLIC_PRINTIFY_TOKEN;
 
 export default async function handler(req, res) {
   const { session_id } = req.query;
@@ -12,44 +13,46 @@ export default async function handler(req, res) {
 
   try {
     const session = await stripe.checkout.sessions.retrieve(session_id);
-    console.log(session);
     const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
 
-    // Extract customer information from session
-    const customerEmail = session.customer_details.email;
-    const shippingAddress = session.shipping_details;
-    const name = session.customer_details.name;
-    // ... any other customer information available in the session
+    // Parsing orderDetails from session metadata
+    const orderDetails = JSON.parse(session.metadata.orderDetails);
 
-    // Here, you can use this information to place an order with Printify
-    // For example, you might send a POST request to your Printify order API route
-
+    // Mapping line items to Printify order details
     const printifyOrderDetails = {
-      items: lineItems.data.map((item) => ({
-        product_id: "6585de66aa1d44090c0fd72c",
-        variant_id: 31950,
-        quantity: item.quantity,
-      })),
-      address: {
-        first_name: name,
-        email: customerEmail,
-        country: shippingAddress.address.country,
-        state: shippingAddress.address.state,
-        address1: shippingAddress.address.line1,
-        address2: shippingAddress.address.line2 || "",
-        city: shippingAddress.address.city,
-        zip: shippingAddress.address.postal_code,
+      line_items: lineItems.data.map((item, index) => {
+        const detail = orderDetails[index];
+
+        return {
+          product_id: detail.productId,
+          variant_id: detail.variantId,
+          quantity: item.quantity,
+        };
+      }),
+      address_to: {
+        first_name: session.customer_details.name.split(" ")[0], // Assuming the first name is the first part of the full name
+        last_name: session.customer_details.name.split(" ")[1] || "", // Assuming the last name is the second part of the full name
+        email: session.customer_details.email,
+        country: session.shipping_details.address.country,
+        address1: session.shipping_details.address.line1,
+        address2: session.shipping_details.address.line2 || "",
+        city: session.shipping_details.address.city,
+        state: session.shipping_details.address.state,
+        zip: session.shipping_details.address.postal_code,
       },
     };
-    console.log(shippingAddress);
-
-    const response = await fetch(`http://localhost:3000/api/printify`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(printifyOrderDetails),
-    });
+    // Sending order to Printify
+    const response = await fetch(
+      `https://api.printify.com/v1/shops/13368790/orders.json`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${PRINTIFY_API_KEY}`,
+        },
+        body: JSON.stringify(printifyOrderDetails),
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`Error from Printify order API: ${response.status}`);
@@ -57,7 +60,6 @@ export default async function handler(req, res) {
 
     const printifyResponse = await response.json();
 
-    // Respond back to the client
     res.status(200).json({
       success: true,
       message: "Stripe and Printify processing completed",

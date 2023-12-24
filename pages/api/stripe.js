@@ -6,6 +6,15 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
       const params = {
+        metadata: {
+          orderDetails: JSON.stringify(
+            req.body.map((item) => ({
+              productId: item.productID,
+              variantId: item.variantId,
+              quantity: item.quantity,
+            }))
+          ),
+        },
         submit_type: "pay",
         mode: "payment",
         payment_method_types: ["card"],

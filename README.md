@@ -28,7 +28,7 @@ This will start the development server and open the project in your browser.
 
 ## Deployment
 
-This project is deployed with Vercel, you can check out the deployed site using the following link [Eternal Life Clothing](https://eternal-life-clothing-mhnq.vercel.app)
+This project is deployed with Vercel, you can check out the deployed site using the following link [Eternal Life Clothing](https://www.eternallifeclothing.org)
 
 
 ## Built With
